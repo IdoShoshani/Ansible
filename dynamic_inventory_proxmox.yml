@@ -1,16 +1,8 @@
 plugin: community.proxmox.proxmox
-# These values should come from environment variables, locally or via AWX.
 url: "{{ lookup('env', 'PROXMOX_URL') }}"
 user: "{{ lookup('env', 'PROXMOX_USER') }}"
-# Proxmox token auth expects the token name here, not the username.
 token_id: "{{ lookup('env', 'PROXMOX_TOKEN_ID') }}"
-# Keep a fallback for older custom credential mappings that used PROXMOX_TOKEN.
-token_secret: "{{ lookup('env', 'PROXMOX_TOKEN_SECRET') | default(lookup('env', 'PROXMOX_TOKEN'), true) }}"
+token_secret: "{{ lookup('env', 'PROXMOX_TOKEN_SECRET') }}"
 cache: false
-validate_certs: false
+validate_certs: true
 want_facts: true
-
-# Grouping: Automatically group VMs by their Proxmox tags
-# keyed_groups:
-#   - prefix: proxmox_ido
-#     key: tags
